@@ -54,7 +54,7 @@ def gemini_response(user_input):
     try:
         api_key = st.secrets["GEMINI_API_KEY"]
     except:
-        api_key = os.getenv('GEMINI_API_KEY', "AIzaSyDygV7ngrZO6TpRtjisJLW7ewiEsT2R9Co")
+        api_key = os.getenv('GEMINI_API_KEY', "AIzaSyBH6Q78afhCBfXsggBl3m6fFJdiUbPzgHM")
     
     if not api_key:
         return "[Gemini API key not set. Please set GEMINI_API_KEY environment variable.]"
@@ -79,8 +79,8 @@ def chatbot_response(user_input):
     prediction_probabilities = model.predict_proba(X_test)[0]
     max_confidence = max(prediction_probabilities)
     
-    # Only use basic responses if confidence is high (above 0.6)
-    if max_confidence > 0.6:
+    # Only use basic responses if confidence is reasonable (above 0.3)
+    if max_confidence > 0.3:
         intent = model.predict(X_test)[0]
         if intent in training_data:
             response = training_data[intent]["responses"]
