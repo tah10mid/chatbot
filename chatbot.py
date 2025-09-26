@@ -50,8 +50,12 @@ model = LogisticRegression()
 model.fit(X, labels)
 
 def gemini_response(user_input):
-    # Set API key directly (you can also use environment variable)
-    api_key = "AIzaSyDygV7ngrZO6TpRtjisJLW7ewiEsT2R9Co"
+    # Get API key from Streamlit secrets or environment variable
+    try:
+        api_key = st.secrets["GEMINI_API_KEY"]
+    except:
+        api_key = os.getenv('GEMINI_API_KEY', "AIzaSyDygV7ngrZO6TpRtjisJLW7ewiEsT2R9Co")
+    
     if not api_key:
         return "[Gemini API key not set. Please set GEMINI_API_KEY environment variable.]"
     genai.configure(api_key=api_key)
