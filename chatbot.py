@@ -59,12 +59,19 @@ def gemini_response(user_input):
     if not api_key:
         return "[Gemini API key not set. Please set GEMINI_API_KEY environment variable.]"
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')  # Updated model name
+    
     try:
+        model = genai.GenerativeModel('gemini-1.5-pro')
         response = model.generate_content(user_input)
         return response.text.strip()
     except Exception as e:
-        return f"[Gemini error: {e}]"
+        error_msg = str(e)
+        if "quota" in error_msg.lower() or "429" in error_msg:
+            return "I'm currently experiencing high usage. Please try again in a few minutes or ask simpler questions that I can handle with my basic responses."
+        elif "404" in error_msg:
+            return "Sorry, I'm having trouble accessing my AI capabilities right now. Please try asking basic questions like greetings or thanks."
+        else:
+            return f"I encountered an error: {e}. Please try asking something else."
 
 # Modify chatbot_response to use Gemini for unknowns
 def chatbot_response(user_input):
