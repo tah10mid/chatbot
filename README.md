@@ -28,8 +28,8 @@ Try asking:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/ai-chatbot.git
-cd ai-chatbot
+git clone https://github.com/tah10mid/chatbot.git
+cd chatbot
 ```
 
 2. Install dependencies:
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 3. Set up your Google Gemini API key:
    - Get an API key from [Google AI Studio](https://aistudio.google.com/)
-   - Replace the API key in `chatbot.py` line 50
+   - Add it to Streamlit secrets or environment variable
 
 4. Run the application:
 ```bash
