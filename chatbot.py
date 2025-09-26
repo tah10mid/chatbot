@@ -79,8 +79,8 @@ def chatbot_response(user_input):
     prediction_probabilities = model.predict_proba(X_test)[0]
     max_confidence = max(prediction_probabilities)
     
-    # Only use basic responses if confidence is reasonable (above 0.3)
-    if max_confidence > 0.3:
+    # Only use basic responses if confidence is high enough (above 0.4)
+    if max_confidence > 0.4:
         intent = model.predict(X_test)[0]
         if intent in training_data:
             response = training_data[intent]["responses"]
